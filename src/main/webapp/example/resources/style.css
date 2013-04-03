@@ -1,0 +1,84 @@
+/* -- RESET BROWSER DEFAULTS -- */
+* {
+	/* margin: 0; */
+	padding: 0;
+}
+
+/* -- COMMON HTML ELEMENTS -- */
+body {
+	color: #333;
+	font-size: 14px;
+}
+ul {
+	list-style: none;
+}
+#clear {
+	clear: both;
+	display: block;
+}
+
+/* -- MAIN ELEMENTS -- */
+#cover {
+	margin: 0 auto;
+	width: 760px;
+	border: 1px solid #ddd;
+}
+header, article, section, aside, footer {
+	display: block;
+}
+
+/* -- Header -- */
+header {
+	background: #888;
+	padding: 20px;
+}
+
+/* -- Navigation */
+nav {
+	width: 100%;
+}
+nav ul li {
+	float: left;
+	padding-right: 15px;
+}
+
+/* Content */
+#content {
+	background: #eee;
+	padding: 20px;
+}
+section {
+	clear: both;
+	/* float: left; */
+	margin-right: 18px;
+	margin-top: 50px;
+	/* border-right: 2px solid #ddd; */
+}
+article {
+	border-bottom: 2px solid #ddd;
+	margin-bottom: 20px;
+	padding: 0 0 10px;
+}
+aside {
+	margin-top: 20px;
+	float: right;
+	width: 120px;
+}
+
+/* Footer */
+footer {
+	clear: both;
+	text-align: center;
+	padding: 20px;
+	background: #888;
+}
+
+#divB {
+	overflow: auto;
+	text-align: center
+}
+
+#divA {
+	float: left;
+	z-index:-1;
+}

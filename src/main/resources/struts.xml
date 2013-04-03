@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.ui.theme" value="simple" />
+	<package name="example" namespace="/example" extends="struts-default">
+
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception"
+				result="error" />
+		</global-exception-mappings>
+
+		<action name="ShowGames" class="myaction.ShowGames">
+			<result name="success">/example/ShowGames.jsp</result>
+			<!-- <result name="error">/Error.jsp</result> -->
+		</action>
+
+		<action name="submitFrame" class="myaction.SubmitBall">
+			<result name="success">/example/PlayGame.jsp</result>
+			<result name="FINISH">/example/ShowGames.jsp</result>
+		</action>
+
+		<action name="addUser" class="myaction.AddPlayers">
+			<result name="success">/example/AddPlayer.jsp</result>
+		</action>
+		<!-- <action name="updateUser" method="update" class="myaction.AddNewPlayer"> 
+			<result name="success">/example/AddPlayer.jsp</result> </action> -->
+
+		<action name="startGame" class="myaction.StartGame">
+			<result name="success">/example/AddPlayer.jsp</result>
+			<result name="RESUME">/example/PlayGame.jsp</result>
+		</action>
+
+		<action name="createGame" class="myaction.CreateGame">
+			<result name="success">/example/PlayGame.jsp</result>
+		</action>
+
+		<action name="submitGame" class="myaction.SubmitGame">
+			<result name="success">/example/ShowGames.jsp</result>
+		</action>
+
+	</package>
+
+</struts>
