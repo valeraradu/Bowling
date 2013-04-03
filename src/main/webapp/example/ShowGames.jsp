@@ -78,10 +78,11 @@
 						</table>
 					</article>
 				</s:iterator>
+				</div>
 			</section>
             
 			<div id="clear"></div>
-			</div>
+			
 		</div>
 
 		<footer>

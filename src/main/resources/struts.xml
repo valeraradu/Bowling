@@ -16,7 +16,7 @@
 
 		<action name="ShowGames" class="myaction.ShowGames">
 			<result name="success">/example/ShowGames.jsp</result>
-			<!-- <result name="error">/Error.jsp</result> -->
+			<result name="error">/Error.jsp</result>
 		</action>
 
 		<action name="submitFrame" class="myaction.SubmitBall">
