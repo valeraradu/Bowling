@@ -40,10 +40,10 @@ public class SubmitBall extends ActionSupport implements SessionAware {
 		Score currentscore = ServiceDao.getScoreByGameAndPlayer(currentGame,
 				currentplayer);
 
-		if (currentball == 1) {
+		if (currentball == 1 && !frameValue.equals("x")) {
 			currentscore.getFrames().get(currentframe).setBall1(frameValue);
 			session.put("currentBall", 2);
-		} else if (currentball == 2 && islastframe) {
+		}else if (currentball == 2 && islastframe) {
 			currentscore.getFrames().get(currentframe).setBall2(frameValue);
 			session.clear();
 			logger.debug("Game finished");

@@ -18,7 +18,7 @@ public class ScoreCountHelper {
 			return 10;
 		} else if (balllist[index].equals("/")) {
 			return 10 - getBallValue(balllist, index - 1);
-		} else if (balllist[index].equals("") || balllist[index].equals(" ")) {
+		} else if (balllist[index].equals("") || balllist[index].equals(" ") || balllist[index].equals("-")) {
 			return 0;
 		} else {
 			return Integer.valueOf(balllist[index]);

@@ -6,7 +6,6 @@ import Bowling.entities.Frame;
 import Bowling.entities.Score;
 import Bowling.util.ScoreCountHelper;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 public class TestScore {
 
