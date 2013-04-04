@@ -41,8 +41,9 @@ public class TestScore {
 			score.getFrames().add(i, f);
 		}
 	  
-	  assertTrue("Maximal score result "+score.getTotal(),
-              score.getTotal()==240);
+	  Integer in =score.getTotal();
+	  assertTrue("Maximal score result "+in,
+              in==270);
   }
   
   @Test
@@ -57,7 +58,7 @@ public class TestScore {
 		}
 	  
 	  assertTrue("Maximal score result "+score.getTotal(),
-              score.getTotal()==195);
+              score.getTotal()==145);
   }
   
   @Test

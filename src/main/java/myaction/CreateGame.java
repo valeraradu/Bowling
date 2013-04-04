@@ -23,9 +23,6 @@ public class CreateGame extends ActionSupport implements SessionAware {
 
 		Game g = new Game();
 		
-		session.values();
-		//session.clear();
-		
 		for(String toBeAddedPlayer : session.keySet()){
 			
 			Score s = new Score();
@@ -49,6 +46,13 @@ public class CreateGame extends ActionSupport implements SessionAware {
 		return SUCCESS;
 	}
 
+	public void validate() {
+
+		if (session.keySet().isEmpty()) {
+			addFieldError("playerName", "Add players if you want to play ;)");
+		}
+	}
+	
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;

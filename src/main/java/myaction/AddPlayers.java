@@ -17,18 +17,17 @@ public class AddPlayers extends ActionSupport implements SessionAware {
 	private String bufferValue;
 
 	public String execute() {
-		if (playerName != null) {
 
-			session.put(playerName, "");
-		}
+		session.put(playerName, "");
 		return SUCCESS;
 	}
 
-	/*
-	 * public String update() {
-	 * 
-	 * session.put(bufferKey, bufferValue); return SUCCESS; }
-	 */
+	public void validate() {
+
+		if (playerName.trim().length() == 0) {
+			addFieldError("playerName", "Just type name here ->");
+		}
+	}
 
 	public String getPlayerName() {
 		return playerName;

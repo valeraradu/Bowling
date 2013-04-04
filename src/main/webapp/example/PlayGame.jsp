@@ -73,24 +73,13 @@
 							</tr>
 						</s:iterator>
 					</table>
+					</br>
 					<s:form>
-						<s:property value="playerName" />
-						<s:property value="FrameNo" />
-						<s:textfield name="frameValue" size="3" />
-						<s:submit action="submitFrame" value="Submit" />
+						<s:textfield name="frameValue" size="3" theme="xhtml" />
+						<s:submit action="submitBall" value="Submit" />
 					</s:form>
 				</article>
 			</section>
-			<%-- 
-			<aside>
-					<s:form>
-						<s:property value="playerName" />
-						<s:property value="FrameNo" />
-						<s:textfield name="frameValue" size="3" />
-						<s:submit action="submitFrame" value="Next Player" />
-					</s:form>
-			</aside> --%>
-
 			<div id="clear"></div>
 		</div>
 

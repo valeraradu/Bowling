@@ -19,16 +19,16 @@
 			<result name="error">/Error.jsp</result>
 		</action>
 
-		<action name="submitFrame" class="myaction.SubmitBall">
+		<action name="submitBall" class="myaction.SubmitBall">
 			<result name="success">/example/PlayGame.jsp</result>
 			<result name="FINISH">/example/ShowGames.jsp</result>
+			<result name="input">/example/PlayGame.jsp</result>
 		</action>
 
 		<action name="addUser" class="myaction.AddPlayers">
 			<result name="success">/example/AddPlayer.jsp</result>
+			<result name="input">/example/AddPlayer.jsp</result>
 		</action>
-		<!-- <action name="updateUser" method="update" class="myaction.AddNewPlayer"> 
-			<result name="success">/example/AddPlayer.jsp</result> </action> -->
 
 		<action name="startGame" class="myaction.StartGame">
 			<result name="success">/example/AddPlayer.jsp</result>
@@ -37,6 +37,7 @@
 
 		<action name="createGame" class="myaction.CreateGame">
 			<result name="success">/example/PlayGame.jsp</result>
+			<result name="input">/example/AddPlayer.jsp</result>
 		</action>
 
 		<action name="submitGame" class="myaction.SubmitGame">

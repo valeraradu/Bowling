@@ -50,7 +50,7 @@
 			<br/>
 			<section>
 				<article>
-					<s:form>
+					<s:form action="addUser">
 						<s:iterator value="session" status="stat">
 							<s:iterator>
 								<s:property value="key" />
@@ -58,19 +58,9 @@
 							</s:iterator>
 						</s:iterator>
 						<br />
-						<s:textfield name="playerName" />
-						<s:submit action="addUser" value="Add" />
+						<s:textfield name="playerName"  theme="xhtml" />
+						<s:submit  value="Add" />
 					</s:form>
-
-
-					<!-- following snippet allows to update entry in map -->
-					<%-- <s:form>
-						<s:iterator value="session">
-							<s:textfield type="hidden" value="%{key}" name="bufferKey"/>
-							<s:textfield name="bufferValue"/>
-						</s:iterator>			
-						<s:submit action="updateUser" value="update" theme="simple" />
-					</s:form> --%>
 				</article>
 			</section>
 

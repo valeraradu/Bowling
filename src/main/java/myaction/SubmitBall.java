@@ -67,6 +67,13 @@ public class SubmitBall extends ActionSupport implements SessionAware {
 
 	}
 
+	public void validate() {
+
+		if (frameValue.trim().equals("")) {
+			addFieldError("frameValue", "type '-' if no pins are knocked down");
+		}
+	}
+	
 	public List getGamelist() {
 		return gamelist;
 	}
