@@ -20,16 +20,13 @@ public class SubmitBall extends ActionSupport implements SessionAware {
 
 	private Map<String, Object> session;
 	private int currentball;
-	private Game currentGame;
+	private Game currentGame = ServiceDao.getCurrentGame();;
 	private String frameValue;
-	private List gamelist = new ArrayList();
 	private Player currentplayer;
 	private int currentframe;
 	
 	public String execute() {
 		
-		gamelist = ServiceDao.showGames();
-		currentGame = ServiceDao.getCurrentGame();
 		currentplayer = (Player) session.get("currentPlayer");
 		currentframe = (Integer) session.get("currentFrameNo");
 		currentball = (Integer) session.get("currentBall");
@@ -72,14 +69,6 @@ public class SubmitBall extends ActionSupport implements SessionAware {
 		if (frameValue.trim().equals("")) {
 			addFieldError("frameValue", "type '-' if no pins are knocked down");
 		}
-	}
-	
-	public List getGamelist() {
-		return gamelist;
-	}
-
-	public void setGamelist(List gamelist) {
-		this.gamelist = gamelist;
 	}
 
 	public Player getCurrentplayer() {
