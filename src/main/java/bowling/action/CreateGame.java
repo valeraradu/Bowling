@@ -22,23 +22,7 @@ public class CreateGame extends ActionSupport implements SessionAware {
 
 	public String execute() {
 
-		Game g = new Game();
-		
-		for(String toBeAddedPlayer : session.keySet()){
-			
-			Score s = new Score();
-			for (int i = 0; i < 10; i++) {
-				Frame f = new Frame();
-				s.getFrames().add(i, f);
-			}
-
-			//serviceDao.persistScore(s);
-
-			g.getScores().put(playerDao.getPlayer(toBeAddedPlayer), s);
-		}
-
-		gameDao.persistGame(g);
-
+		gameDao.createNewGame(session);
 		currentGame = gameDao.getCurrentGame();
 		session.put("currentPlayer", playerDao.getPlayersByGame(currentGame)
 				.get(0));

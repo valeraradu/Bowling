@@ -1,9 +1,5 @@
 package bowling.util;
 
-import static bowling.util.ScoreCounter.getBallValue;
-import static bowling.util.ScoreCounter.getNextBallIndex;
-import static bowling.util.ScoreCounter.getNextBallValue;
-
 import java.util.List;
 
 import bowling.entities.Frame;
@@ -57,13 +53,14 @@ public class ScoreCounter {
 		}
 
 		for (int i = 0; i < 20; i++) {
+			//case when strike is earned
 			if (balllist[i].equals("x")) {
 				total += 10;
 				int next = getNextBallIndex(balllist, i);
 				total += getBallValue(balllist, next);
 				int nextnext = getNextBallIndex(balllist,next);
 				total += getBallValue(balllist,nextnext);
-				
+		    //case when spare is earned
 			} else if (balllist[i].equals("/")) {
 				total += getBallValue(balllist, i);
 				total += getNextBallValue(balllist, i);

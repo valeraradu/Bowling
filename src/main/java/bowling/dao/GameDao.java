@@ -1,6 +1,7 @@
 package bowling.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import bowling.entities.Frame;
 import bowling.entities.Game;
 import bowling.entities.Player;
 import bowling.entities.Score;
-
 
 @Component
 @Transactional
@@ -24,10 +25,10 @@ public class GameDao {
 
 	@Autowired
 	private ScoreDao scoreDao;
-	
+
 	@Autowired
 	private PlayerDao playerDao;
-	
+
 	public List showGames() {
 
 		Query query = entityManager.createQuery("from Game");
@@ -62,6 +63,24 @@ public class GameDao {
 
 		return game;
 
+	}
+
+	public Game createNewGame(Map<String, Object> session) {
+
+		Game game = new Game();
+
+		for (String toBeAddedPlayer : session.keySet()) {
+
+			Score s = new Score();
+			for (int i = 0; i < 10; i++) {
+				Frame f = new Frame();
+				s.getFrames().add(i, f);
+			}
+
+			game.getScores().put(playerDao.getPlayer(toBeAddedPlayer), s);
+		}
+		this.persistGame(game);
+		return game;
 	}
 
 	public EntityManager getEntityManager() {
