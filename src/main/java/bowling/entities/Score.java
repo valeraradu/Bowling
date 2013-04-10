@@ -1,15 +1,17 @@
-package Bowling.entities;
+package bowling.entities;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
-import static Bowling.util.ScoreCountHelper.*;
+
+import static bowling.util.ScoreCounter.*;
 
 @Entity
 public class Score {
@@ -18,7 +20,7 @@ public class Score {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int scoreId;
 
-	@OneToMany(cascade = CascadeType.ALL, targetEntity = Frame.class)
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = Frame.class, fetch=FetchType.EAGER)
 	private List<Frame> frames = new ArrayList<Frame>();
 
 	@Transient

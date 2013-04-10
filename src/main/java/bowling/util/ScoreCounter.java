@@ -1,14 +1,15 @@
-package Bowling.util;
+package bowling.util;
 
-import static Bowling.util.ScoreCountHelper.getBallValue;
-import static Bowling.util.ScoreCountHelper.getNextBallIndex;
-import static Bowling.util.ScoreCountHelper.getNextBallValue;
+import static bowling.util.ScoreCounter.getBallValue;
+import static bowling.util.ScoreCounter.getNextBallIndex;
+import static bowling.util.ScoreCounter.getNextBallValue;
 
 import java.util.List;
 
-import Bowling.entities.Frame;
+import bowling.entities.Frame;
 
-public class ScoreCountHelper {
+
+public class ScoreCounter {
 
 	public static Integer getBallValue(String[] balllist, int index) {
 
@@ -40,8 +41,7 @@ public class ScoreCountHelper {
 	}
 
 	public static Integer getNextBallValue(String[] balllist, int index) {
-
-		//int i = getNextBallIndex(balllist, index);
+		
 		return getBallValue(balllist, getNextBallIndex(balllist, index));
 
 	}
@@ -57,8 +57,6 @@ public class ScoreCountHelper {
 		}
 
 		for (int i = 0; i < 20; i++) {
-			if(i==9)
-				System.out.print(total);
 			if (balllist[i].equals("x")) {
 				total += 10;
 				int next = getNextBallIndex(balllist, i);

@@ -14,33 +14,33 @@
 				result="error" />
 		</global-exception-mappings>
 
-		<action name="ShowGames" class="myaction.ShowGames">
+		<action name="ShowGames" class="bowling.action.ShowGames">
 			<result name="success">/example/ShowGames.jsp</result>
-			<result name="error">/Error.jsp</result>
+			<result name="error">/example/Error.jsp</result>
 		</action>
 
-		<action name="submitBall" class="myaction.SubmitBall">
+		<action name="submitBall" class="bowling.action.SubmitBall">
 			<result name="success">/example/PlayGame.jsp</result>
 			<result name="FINISH">/example/ShowGames.jsp</result>
 			<result name="input">/example/PlayGame.jsp</result>
 		</action>
 
-		<action name="addUser" class="myaction.AddPlayers">
+		<action name="addUser" class="bowling.action.AddPlayers">
 			<result name="success">/example/AddPlayer.jsp</result>
 			<result name="input">/example/AddPlayer.jsp</result>
 		</action>
 
-		<action name="startGame" class="myaction.StartGame">
+		<action name="startGame" class="bowling.action.StartGame">
 			<result name="success">/example/AddPlayer.jsp</result>
 			<result name="RESUME">/example/PlayGame.jsp</result>
 		</action>
 
-		<action name="createGame" class="myaction.CreateGame">
+		<action name="createGame" class="bowling.action.CreateGame">
 			<result name="success">/example/PlayGame.jsp</result>
 			<result name="input">/example/AddPlayer.jsp</result>
 		</action>
 
-		<action name="submitGame" class="myaction.SubmitGame">
+		<action name="submitGame" class="bowling.action.SubmitGame">
 			<result name="success">/example/ShowGames.jsp</result>
 		</action>
 

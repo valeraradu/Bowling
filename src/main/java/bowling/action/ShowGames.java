@@ -1,22 +1,30 @@
-package myaction;
+package bowling.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import javax.persistence.EntityManager;
-import Bowling.Dao.ServiceDao;
-import Bowling.entities.Game;
-import Bowling.entities.Score;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.ListableBeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
-public class ShowGames extends BowlingSupport {
- 
+import bowling.dao.GameDao;
+
+
+public class ShowGames extends BowlingSupport implements ApplicationContextAware  {
+
 	private List gamelist = new ArrayList();
+
+	private GameDao gameDao;
+
+	private ApplicationContext context;
 
 	@Override
 	public String execute() throws Exception {
 		
-		gamelist = ServiceDao.showGames();
-		
+		gamelist = gameDao.showGames();
+
 		return SUCCESS;
 
 	}
@@ -27,6 +35,23 @@ public class ShowGames extends BowlingSupport {
 
 	public void setGamelist(List gamelist) {
 		this.gamelist = gamelist;
+	}
+
+
+	public GameDao getGameDao() {
+		return gameDao;
+	}
+
+
+	public void setGameDao(GameDao gameDao) {
+		this.gameDao = gameDao;
+	}
+
+	@Override
+	public void setApplicationContext(ApplicationContext arg0)
+			throws BeansException {
+		this.context=arg0;
+		
 	}
 
 }

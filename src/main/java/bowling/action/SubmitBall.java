@@ -1,4 +1,4 @@
-package myaction;
+package bowling.action;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,10 +7,14 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
 
-import Bowling.Dao.ServiceDao;
-import Bowling.entities.Game;
-import Bowling.entities.Player;
-import Bowling.entities.Score;
+
+import bowling.dao.FrameDao;
+import bowling.dao.GameDao;
+import bowling.dao.PlayerDao;
+import bowling.dao.ScoreDao;
+import bowling.entities.Game;
+import bowling.entities.Player;
+import bowling.entities.Score;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -18,56 +22,64 @@ public class SubmitBall extends ActionSupport implements SessionAware {
 
 	private static final Logger logger = Logger.getLogger(ActionSupport.class);
 
+	private GameDao gameDao;
+	private PlayerDao playerDao;
+	private ScoreDao scoreDao;
+	private FrameDao frameDao;
 	private Map<String, Object> session;
-	private int currentball;
-	private Game currentGame = ServiceDao.getCurrentGame();;
+	private Game currentGame;
 	private String frameValue;
 	private Player currentplayer;
 	private int currentframe;
-	
+	private int currentball;
+	private List gamelist = new ArrayList();
+
 	public String execute() {
+
+			currentGame = gameDao.getCurrentGame();
+			currentplayer = (Player) session.get("currentPlayer");
+			currentframe = (Integer) session.get("currentFrameNo");
+			currentball = (Integer) session.get("currentBall");
+
+			boolean islastframe = frameDao.isLastFrame(currentplayer,
+					currentframe);
+
+			Score currentscore = scoreDao.getScoreByGameAndPlayer(
+					currentGame, currentplayer);
+
+			if (currentball == 1 && !frameValue.equals("x")) {
+				currentscore.getFrames().get(currentframe).setBall1(frameValue);
+				session.put("currentBall", 2);
+			} else if (currentball == 2 && islastframe) {
+				currentscore.getFrames().get(currentframe).setBall2(frameValue);
+				session.clear();
+				logger.debug("Game finished");
+				return "FINISH";
+
+			} else {
+				currentscore.getFrames().get(currentframe).setBall2(frameValue);
+				session.put("currentPlayer",
+						playerDao.getNextPlayerCurrentGame(currentplayer));
+				session.put("currentFrameNo", frameDao
+						.getNextFrameNoCurrentGamePlayer(currentplayer,
+								currentframe));
+				session.put("currentBall", 1);
+			}
+
+			
+			currentGame.getScores().put(currentplayer, currentscore);
+			gameDao.updateGame(currentGame);
+			logger.debug("Ball submited");
+			return SUCCESS;
 		
-		currentplayer = (Player) session.get("currentPlayer");
-		currentframe = (Integer) session.get("currentFrameNo");
-		currentball = (Integer) session.get("currentBall");
-		
-		boolean islastframe = BowlingSupport.isLastFrame(currentplayer,
-				currentframe);
-
-		Score currentscore = ServiceDao.getScoreByGameAndPlayer(currentGame,
-				currentplayer);
-
-		if (currentball == 1 && !frameValue.equals("x")) {
-			currentscore.getFrames().get(currentframe).setBall1(frameValue);
-			session.put("currentBall", 2);
-		}else if (currentball == 2 && islastframe) {
-			currentscore.getFrames().get(currentframe).setBall2(frameValue);
-			session.clear();
-			logger.debug("Game finished");
-			return "FINISH";
-
-		} else {
-			currentscore.getFrames().get(currentframe).setBall2(frameValue);
-			session.put("currentPlayer",
-					BowlingSupport.getNextPlayerCurrentGame(currentplayer));
-			session.put("currentFrameNo", BowlingSupport
-					.getNextFrameNoCurrentGamePlayer(currentplayer,
-							currentframe));
-			session.put("currentBall", 1);
-		}
-
-		ServiceDao.persistScore(currentscore);
-		currentGame.getScores().put(currentplayer, currentscore);
-		ServiceDao.persistGame(currentGame);
-		logger.debug("Ball submited");
-		return SUCCESS;
 
 	}
 
 	public void validate() {
 
 		if (frameValue.trim().equals("")) {
-			addFieldError("frameValue", "type '-' if no pins are knocked down");
+			addFieldError("frameValue",
+					"type \"-\" if no pins are knocked down");
 		}
 	}
 
@@ -94,7 +106,7 @@ public class SubmitBall extends ActionSupport implements SessionAware {
 	public void setCurrentball(int currentball) {
 		this.currentball = currentball;
 	}
-	
+
 	public Map<String, Object> getSession() {
 		return session;
 	}
@@ -104,7 +116,7 @@ public class SubmitBall extends ActionSupport implements SessionAware {
 	}
 
 	public Game getCurrentGame() {
-		return currentGame;
+		return currentGame=gameDao.getCurrentGame();
 	}
 
 	public void setCurrentGame(Game currentGame) {
@@ -118,4 +130,46 @@ public class SubmitBall extends ActionSupport implements SessionAware {
 	public void setFrameValue(String frameValue) {
 		this.frameValue = frameValue;
 	}
+
+	public GameDao getGameDao() {
+		return gameDao;
+	}
+
+	public void setGameDao(GameDao gameDao) {
+		this.gameDao = gameDao;
+	}
+
+	public PlayerDao getPlayerDao() {
+		return playerDao;
+	}
+
+	public void setPlayerDao(PlayerDao playerDao) {
+		this.playerDao = playerDao;
+	}
+	
+	public ScoreDao getScoreDao() {
+		return scoreDao;
+	}
+
+	public void setScoreDao(ScoreDao scoreDao) {
+		this.scoreDao = scoreDao;
+	}
+
+	public FrameDao getFrameDao() {
+		return frameDao;
+	}
+
+	public void setFrameDao(FrameDao frameDao) {
+		this.frameDao = frameDao;
+	}
+
+	public List getGamelist() {
+		return gamelist=gameDao.showGames();
+	}
+
+	public void setGamelist(List gamelist) {
+		this.gamelist = gamelist;
+	}
+
+	
 }

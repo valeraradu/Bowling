@@ -1,10 +1,11 @@
-package Bowling.entities;
+package bowling.entities;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +19,7 @@ public class Game {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int gameId;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@MapKeyJoinColumn(name="player")
 	private Map<Player, Score> scores = new HashMap<Player, Score>();
 

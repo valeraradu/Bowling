@@ -1,13 +1,10 @@
-package myaction;
+package bowling.action;
 
 import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
-import Bowling.entities.Frame;
-import Bowling.entities.Score;
 
 import com.opensymphony.xwork2.ActionSupport;
-import java.util.UUID;
 
 public class AddPlayers extends ActionSupport implements SessionAware {
 

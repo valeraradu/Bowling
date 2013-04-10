@@ -1,4 +1,4 @@
-package myaction;
+package bowling.action;
 import javax.servlet.ServletContext;
 
 import org.apache.log4j.Logger;

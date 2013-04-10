@@ -1,4 +1,4 @@
-package Bowling.entities;
+package bowling.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

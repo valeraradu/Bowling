@@ -2,9 +2,10 @@ package Bowling2.example;
 
 import org.junit.*;
 
-import Bowling.entities.Frame;
-import Bowling.entities.Score;
-import Bowling.util.ScoreCountHelper;
+import bowling.entities.Frame;
+import bowling.entities.Score;
+import bowling.util.ScoreCounter;
+
 import static org.junit.Assert.*;
 
 public class TestScore {
@@ -82,10 +83,10 @@ public class TestScore {
 	  String[] str={"x","","x","","x"};
 	  
 	  
-	  assertTrue("Average score result  index 0 expected 2 get " +ScoreCountHelper.getNextBallIndex(str, 3),
-			  ScoreCountHelper.getNextBallIndex(str, 3)==4);
-	  assertTrue("Average score result  index 1 expected 2 get " +ScoreCountHelper.getNextBallIndex(str, 4),
-			  ScoreCountHelper.getNextBallIndex(str, 4)==-1);
+	  assertTrue("Average score result  index 0 expected 2 get " +ScoreCounter.getNextBallIndex(str, 3),
+			  ScoreCounter.getNextBallIndex(str, 3)==4);
+	  assertTrue("Average score result  index 1 expected 2 get " +ScoreCounter.getNextBallIndex(str, 4),
+			  ScoreCounter.getNextBallIndex(str, 4)==-1);
 	  
   }
   

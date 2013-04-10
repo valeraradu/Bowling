@@ -1,21 +1,22 @@
-package myaction;
+package bowling.action;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
-import Bowling.Dao.ServiceDao;
-import Bowling.entities.Frame;
-import Bowling.entities.Game;
-import Bowling.entities.Player;
-import Bowling.entities.Score;
+
+import bowling.dao.GameDao;
+import bowling.dao.PlayerDao;
+import bowling.entities.Frame;
+import bowling.entities.Game;
+import bowling.entities.Score;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 public class CreateGame extends ActionSupport implements SessionAware {
 
 	private Game currentGame;
+	private PlayerDao playerDao;
+	private GameDao gameDao;
 
 	private Map<String, Object> session;
 
@@ -31,15 +32,15 @@ public class CreateGame extends ActionSupport implements SessionAware {
 				s.getFrames().add(i, f);
 			}
 
-			ServiceDao.persistScore(s);
+			//serviceDao.persistScore(s);
 
-			g.getScores().put(ServiceDao.getPlayer(toBeAddedPlayer), s);
+			g.getScores().put(playerDao.getPlayer(toBeAddedPlayer), s);
 		}
 
-		ServiceDao.persistGame(g);
+		gameDao.persistGame(g);
 
-		currentGame = ServiceDao.getCurrentGame();
-		session.put("currentPlayer", ServiceDao.getPlayersByGame(currentGame)
+		currentGame = gameDao.getCurrentGame();
+		session.put("currentPlayer", playerDao.getPlayersByGame(currentGame)
 				.get(0));
 		session.put("currentFrameNo", 0);
 		session.put("currentBall", 1);
@@ -71,4 +72,22 @@ public class CreateGame extends ActionSupport implements SessionAware {
 	public void setCurrentGame(Game currentGame) {
 		this.currentGame = currentGame;
 	}
+	
+
+	public PlayerDao getPlayerDao() {
+		return playerDao;
+	}
+
+	public void setPlayerDao(PlayerDao playerDao) {
+		this.playerDao = playerDao;
+	}
+
+	public GameDao getGameDao() {
+		return gameDao;
+	}
+
+	public void setGameDao(GameDao gameDao) {
+		this.gameDao = gameDao;
+	}
+
 }

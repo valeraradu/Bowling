@@ -1,21 +1,23 @@
-package myaction;
+package bowling.action;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
-import Bowling.Dao.ServiceDao;
-import Bowling.entities.Frame;
-import Bowling.entities.Game;
-import Bowling.entities.Player;
-import Bowling.entities.Score;
+
+import bowling.dao.GameDao;
+import bowling.entities.Frame;
+import bowling.entities.Game;
+import bowling.entities.Player;
+import bowling.entities.Score;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 public class StartGame extends ActionSupport implements SessionAware {
 
 	private Game currentGame;
+	private GameDao gameDao;
 	
 	private Map<String, Object> session;
 
@@ -26,7 +28,7 @@ public class StartGame extends ActionSupport implements SessionAware {
 			return SUCCESS;
 			
 		} else {
-			currentGame = ServiceDao.getCurrentGame();
+			currentGame = gameDao.getCurrentGame();
 			return "RESUME";
 		}
 	}
@@ -49,4 +51,13 @@ public class StartGame extends ActionSupport implements SessionAware {
 	public void setCurrentGame(Game currentGame) {
 		this.currentGame = currentGame;
 	}
+
+	public GameDao getGameDao() {
+		return gameDao;
+	}
+
+	public void setGameDao(GameDao gameDao) {
+		this.gameDao = gameDao;
+	}
+
 }
