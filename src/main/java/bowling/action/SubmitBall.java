@@ -28,7 +28,7 @@ public class SubmitBall extends ActionSupport implements SessionAware {
 	private FrameDao frameDao;
 	private Map<String, Object> session;
 	private Game currentGame;
-	private String frameValue;
+	private String ballValue;
 	private Player currentplayer;
 	private int currentframe;
 	private int currentball;
@@ -47,17 +47,17 @@ public class SubmitBall extends ActionSupport implements SessionAware {
 			Score currentscore = scoreDao.getScoreByGameAndPlayer(
 					currentGame, currentplayer);
 
-			if (currentball == 1 && !frameValue.equals("x")) {
-				currentscore.getFrames().get(currentframe).setBall1(frameValue);
+			if (currentball == 1 && !ballValue.equals("x")) {
+				currentscore.getFrames().get(currentframe).setBall1(ballValue);
 				session.put("currentBall", 2);
 			} else if (currentball == 2 && islastframe) {
-				currentscore.getFrames().get(currentframe).setBall2(frameValue);
+				currentscore.getFrames().get(currentframe).setBall2(ballValue);
 				session.clear();
 				logger.debug("Game finished");
 				return "FINISH";
 
 			} else {
-				currentscore.getFrames().get(currentframe).setBall2(frameValue);
+				currentscore.getFrames().get(currentframe).setBall2(ballValue);
 				session.put("currentPlayer",
 						playerDao.getNextPlayerCurrentGame(currentplayer));
 				session.put("currentFrameNo", frameDao
@@ -77,7 +77,7 @@ public class SubmitBall extends ActionSupport implements SessionAware {
 
 	public void validate() {
 
-		if (frameValue.trim().equals("")) {
+		if (ballValue.trim().equals("")) {
 			addFieldError("frameValue",
 					"type \"-\" if no pins are knocked down");
 		}
@@ -124,11 +124,11 @@ public class SubmitBall extends ActionSupport implements SessionAware {
 	}
 
 	public String getFrameValue() {
-		return frameValue;
+		return ballValue;
 	}
 
 	public void setFrameValue(String frameValue) {
-		this.frameValue = frameValue;
+		this.ballValue = frameValue;
 	}
 
 	public GameDao getGameDao() {
