@@ -3,6 +3,7 @@ package bowling.dao;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -23,10 +24,10 @@ public class GameDao {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	@Autowired
+	@Inject
 	private ScoreDao scoreDao;
 
-	@Autowired
+	@Inject
 	private PlayerDao playerDao;
 
 	public List showGames() {
@@ -77,7 +78,7 @@ public class GameDao {
 				s.getFrames().add(i, f);
 			}
 
-			game.getScores().put(playerDao.getPlayer(toBeAddedPlayer), s);
+			game.getScores().put(playerDao.findOrCreate(toBeAddedPlayer), s);
 		}
 		this.persistGame(game);
 		return game;

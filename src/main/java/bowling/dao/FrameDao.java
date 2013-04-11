@@ -2,6 +2,8 @@ package bowling.dao;
 
 import java.util.List;
 
+
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -22,10 +24,10 @@ public class FrameDao {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	@Autowired
+	@Inject
 	private PlayerDao playerDao;
 	
-	@Autowired
+	@Inject
 	private GameDao gameDao;
 	
 	public void persistFrame(Frame frame) {

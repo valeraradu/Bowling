@@ -11,8 +11,10 @@ public class ScoreCounter {
 
 		if (index == -1) {
 			return 0;
+			//there x stand for strike
 		} else if (balllist[index].equals("x")) {
 			return 10;
+			//there / stand for spare
 		} else if (balllist[index].equals("/")) {
 			return 10 - getBallValue(balllist, index - 1);
 		} else if (balllist[index].equals("") || balllist[index].equals(" ") || balllist[index].equals("-")) {

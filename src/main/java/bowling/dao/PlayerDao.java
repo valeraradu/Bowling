@@ -3,6 +3,7 @@ package bowling.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -23,7 +24,7 @@ public class PlayerDao {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	@Autowired
+	@Inject
 	private GameDao gameDao;
 
 	public void persistPlayer(Player player) {
@@ -32,7 +33,7 @@ public class PlayerDao {
 
 	}
 
-	public Player getPlayer(String name) {
+	public Player findOrCreate(String name) {
 		Player p;
 		try {
 			Query q = entityManager

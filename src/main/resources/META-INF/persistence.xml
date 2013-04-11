@@ -3,7 +3,7 @@
   
   <persistence-unit name="JPAStrutsPU">
        <properties>
-          <property name="hibernate.hbm2ddl.auto" value="update"/>
+          <!-- <property name="hibernate.hbm2ddl.auto" value="update"/> -->
        </properties>
    </persistence-unit>
    

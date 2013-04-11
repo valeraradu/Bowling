@@ -46,11 +46,8 @@ public class Player {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((playerName == null) ? 0 : playerName.hashCode());
-		return result;
+		
+		return playerId;
 	}
 
 	@Override
